@@ -33,7 +33,7 @@ class GildedRose
     public function updateQuality()
     {
         foreach ($this->items as $item) {
-            $this->processItem($item);
+            $this->tickItem($item);
         }
     }
 
@@ -42,20 +42,20 @@ class GildedRose
      *
      * @throws InvalidArgumentException
      */
-    private function processItem(Item $item)
+    private function tickItem(Item $item)
     {
         switch ($item->name) {
             case self::NORMAL:
-                $this->processNormalItem($item);
+                $this->tickNormalItem($item);
                 break;
             case self::AGED_BRIE:
-                $this->processAgedBrieItem($item);
+                $this->tickAgedBrieItem($item);
                 break;
             case self::BACKSTAGE:
-                $this->processBackstageItem($item);
+                $this->tickBackstageItem($item);
                 break;
             case self::SULFURAS:
-                $this->processSulfurasItem($item);
+                $this->tickSulfurasItem($item);
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('Could not find handler for Item %s', $item->name));
@@ -65,7 +65,7 @@ class GildedRose
     /**
      * @param Item $item
      */
-    private function processNormalItem(Item $item)
+    private function tickNormalItem(Item $item)
     {
         $item->sellIn -= 1;
         $item->quality -= 1;
@@ -80,7 +80,7 @@ class GildedRose
     /**
      * @param Item $item
      */
-    private function processAgedBrieItem(Item $item)
+    private function tickAgedBrieItem(Item $item)
     {
         $item->quality += 1;
         $item->sellIn -= 1;
@@ -95,7 +95,7 @@ class GildedRose
     /**
      * @param Item $item
      */
-    private function processBackstageItem(Item $item)
+    private function tickBackstageItem(Item $item)
     {
         $item->quality += 1;
 
@@ -117,7 +117,7 @@ class GildedRose
     /**
      * @param Item $item
      */
-    private function processSulfurasItem(Item $item)
+    private function tickSulfurasItem(Item $item)
     {
     }
 }
