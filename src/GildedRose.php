@@ -32,14 +32,14 @@ class GildedRose
     public function updateQuality()
     {
         foreach ($this->items as $item) {
-            $this->processItem($item);
+            $this->tickItem($item);
         }
     }
 
     /**
      * @param Item $item
      */
-    private function processItem(Item $item)
+    private function tickItem(Item $item)
     {
         if ($item->name == self::AGED_BRIE) {
             if ($item->quality < 50) {
