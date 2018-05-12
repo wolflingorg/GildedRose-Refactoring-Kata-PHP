@@ -31,17 +31,17 @@ class GildedRose
     public function updateQuality()
     {
         foreach ($this->items as $item) {
-            $this->processItem($item);
+            $this->tickItem($item);
         }
     }
 
     /**
      * @param Item $item
      */
-    private function processItem(Item $item)
+    private function tickItem(Item $item)
     {
         if ($item->name == self::NORMAL) {
-            $this->processNormalItem($item);
+            $this->tickNormalItem($item);
             return;
         }
 
@@ -87,7 +87,7 @@ class GildedRose
     /**
      * @param Item $item
      */
-    private function processNormalItem(Item $item)
+    private function tickNormalItem(Item $item)
     {
         $item->sellIn -= 1;
         $item->quality -= 1;
