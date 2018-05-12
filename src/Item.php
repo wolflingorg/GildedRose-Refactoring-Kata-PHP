@@ -1,6 +1,7 @@
 <?php
 
-class Item {
+class Item
+{
     /**
      * @var string
      */
