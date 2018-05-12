@@ -26,9 +26,9 @@ class ItemTest extends TestCase
             [new BackstageItem(0, $quality), 0],
             [new BackstageItem(-10, $quality), 0],
 
-            [new Item(30, $quality), $quality - 1],
-            [new Item(0, $quality), $quality - 2],
-            [new Item(-10, $quality), $quality - 2],
+            [new NormalItem('Normal', 30, $quality), $quality - 1],
+            [new NormalItem('Normal', 0, $quality), $quality - 2],
+            [new NormalItem('Normal', -10, $quality), $quality - 2],
         ];
     }
 
@@ -55,14 +55,14 @@ class ItemTest extends TestCase
             [$days, new BackstageItem(0, $quality), 0],
             [$days, new BackstageItem(-10, $quality), 0],
 
-            [$days, new Item(30, $quality), $quality - 1 * $days],
-            [$days, new Item(0, $quality), $quality - 2 * $days],
-            [$days, new Item(-10, $quality), $quality - 2 * $days],
+            [$days, new NormalItem('Normal', 30, $quality), $quality - 1 * $days],
+            [$days, new NormalItem('Normal', 0, $quality), $quality - 2 * $days],
+            [$days, new NormalItem('Normal', -10, $quality), $quality - 2 * $days],
         ];
     }
 
     /**
-     * @param Item $item
+     * @param NormalItem $item
      * @param int $expected
      * @dataProvider itemsDataProvider
      */
@@ -75,7 +75,7 @@ class ItemTest extends TestCase
 
     /**
      * @param int $days
-     * @param Item $item
+     * @param NormalItem $item
      * @param int $expected
      * @dataProvider itemsAfterFewDaysDataProvider
      */

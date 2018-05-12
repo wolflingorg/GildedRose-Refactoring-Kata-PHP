@@ -7,13 +7,12 @@ class ItemFactory
      * @param $sellIn
      * @param $quality
      *
-     * @return Item
-     * @throws InvalidArgumentException
+     * @return AbstractItem
      */
     public static function create($name, $sellIn, $quality)
     {
         if (!in_array($name, array_keys(self::getConfig()))) {
-            throw new \InvalidArgumentException(sprintf('Could not find handler for Item %s', $name));
+            return new NormalItem($name, $sellIn, $quality);
         }
 
         $className = self::getConfig()[$name];
@@ -30,7 +29,6 @@ class ItemFactory
             'Aged Brie' => AgedBrieItem::class,
             'Backstage passes to a TAFKAL80ETC concert' => BackstageItem::class,
             'Sulfuras, Hand of Ragnaros' => SulfurasItem::class,
-            'Normal' => Item::class,
         ];
     }
 }

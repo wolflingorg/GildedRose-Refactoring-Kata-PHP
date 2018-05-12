@@ -1,8 +1,18 @@
 <?php
 
-class AgedBrieItem extends Item
+class AgedBrieItem extends AbstractItem
 {
     protected $name = 'Aged Brie';
+
+    /**
+     * @param $sellIn
+     * @param $quality
+     */
+    public function __construct($sellIn, $quality)
+    {
+        $this->sellIn = $sellIn;
+        $this->quality = $quality;
+    }
 
     /**
      * @inheritdoc

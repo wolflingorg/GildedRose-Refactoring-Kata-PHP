@@ -1,8 +1,18 @@
 <?php
 
-class BackstageItem extends Item
+class BackstageItem extends AbstractItem
 {
     protected $name = 'Backstage passes to a TAFKAL80ETC concert';
+
+    /**
+     * @param $sellIn
+     * @param $quality
+     */
+    public function __construct($sellIn, $quality)
+    {
+        $this->sellIn = $sellIn;
+        $this->quality = $quality;
+    }
 
     /**
      * @inheritdoc

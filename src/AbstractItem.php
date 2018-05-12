@@ -1,11 +1,11 @@
 <?php
 
-class Item
+abstract class AbstractItem
 {
     /**
      * @var string
      */
-    protected $name = 'Normal';
+    protected $name;
 
     /**
      * @var int
@@ -16,16 +16,6 @@ class Item
      * @var int
      */
     protected $quality;
-
-    /**
-     * @param $sellIn
-     * @param $quality
-     */
-    public function __construct($sellIn, $quality)
-    {
-        $this->sellIn = $sellIn;
-        $this->quality = $quality;
-    }
 
     /**
      * @return string
@@ -62,15 +52,5 @@ class Item
     /**
      * Updates quality and sellIn for Item
      */
-    public function tick()
-    {
-        $this->sellIn -= 1;
-        $this->quality -= 1;
-
-        if ($this->sellIn < 0) {
-            $this->quality -= 1;
-        }
-
-        $this->quality = ($this->quality >= 0) ? $this->quality : 0;
-    }
+    abstract public function tick();
 }

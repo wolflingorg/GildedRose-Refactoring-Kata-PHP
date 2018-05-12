@@ -13,12 +13,12 @@ class ItemFactoryTest extends TestCase
             [["Sulfuras, Hand of Ragnaros", 0, 0], SulfurasItem::class],
             [["Aged Brie", 0, 0], AgedBrieItem::class],
             [["Backstage passes to a TAFKAL80ETC concert", 0, 0], BackstageItem::class],
-            [["Normal", 0, 0], Item::class],
+            [["Normal", 0, 0], AbstractItem::class],
         ];
     }
 
     /**
-     * @param Item $data
+     * @param AbstractItem $data
      * @param int $expected
      * @dataProvider itemsDataProvider
      */
@@ -27,13 +27,5 @@ class ItemFactoryTest extends TestCase
         $item = ItemFactory::create(...$data);
 
         $this->assertInstanceOf($expected, $item);
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    function testInvalidArgumentException()
-    {
-        ItemFactory::create("Exception", 0, 0);
     }
 }
