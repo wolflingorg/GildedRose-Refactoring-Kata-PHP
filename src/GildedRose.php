@@ -25,8 +25,6 @@ class GildedRose
         $this->items = $items;
     }
 
-
-
     /**
      * Updates quality and sellIn for Item
      */
