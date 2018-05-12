@@ -27,6 +27,8 @@ class GildedRose
 
     /**
      * Updates quality and sellIn for Item
+     *
+     * @throws InvalidArgumentException
      */
     public function updateQuality()
     {
@@ -37,50 +39,26 @@ class GildedRose
 
     /**
      * @param Item $item
+     *
+     * @throws InvalidArgumentException
      */
     private function processItem(Item $item)
     {
-        if ($item->name == self::NORMAL) {
-            $this->processNormalItem($item);
-            return;
-        }
-
-        if ($item->name == self::AGED_BRIE) {
-            if ($item->quality < 50) {
-                $item->quality = $item->quality + 1;
-            }
-        }
-
-        if ($item->name == self::BACKSTAGE) {
-            if ($item->quality < 50) {
-                $item->quality = $item->quality + 1;
-                if ($item->sellIn < 11) {
-                    if ($item->quality < 50) {
-                        $item->quality = $item->quality + 1;
-                    }
-                }
-                if ($item->sellIn < 6) {
-                    if ($item->quality < 50) {
-                        $item->quality = $item->quality + 1;
-                    }
-                }
-            }
-        }
-
-        if ($item->name != self::SULFURAS) {
-            $item->sellIn = $item->sellIn - 1;
-        }
-
-        if ($item->sellIn < 0) {
-            if ($item->name == self::AGED_BRIE) {
-                if ($item->quality < 50) {
-                    $item->quality = $item->quality + 1;
-                }
-            }
-
-            if ($item->name == self::BACKSTAGE) {
-                $item->quality = $item->quality - $item->quality;
-            }
+        switch ($item->name) {
+            case self::NORMAL:
+                $this->processNormalItem($item);
+                break;
+            case self::AGED_BRIE:
+                $this->processAgedBrieItem($item);
+                break;
+            case self::BACKSTAGE:
+                $this->processBackstageItem($item);
+                break;
+            case self::SULFURAS:
+                $this->processSulfurasItem($item);
+                break;
+            default:
+                throw new \InvalidArgumentException(sprintf('Could not find handler for Item %s', $item->name));
         }
     }
 
@@ -97,5 +75,49 @@ class GildedRose
         }
 
         $item->quality = ($item->quality >= 0) ? $item->quality : 0;
+    }
+
+    /**
+     * @param Item $item
+     */
+    private function processAgedBrieItem(Item $item)
+    {
+        $item->quality += 1;
+        $item->sellIn -= 1;
+
+        if ($item->sellIn < 0) {
+            $item->quality += 1;
+        }
+
+        $item->quality = ($item->quality < 50) ? $item->quality : 50;
+    }
+
+    /**
+     * @param Item $item
+     */
+    private function processBackstageItem(Item $item)
+    {
+        $item->quality += 1;
+
+        if ($item->sellIn < 11) {
+            $item->quality += 1;
+        }
+
+        if ($item->sellIn < 6) {
+            $item->quality += 1;
+        }
+
+        $item->quality = ($item->quality < 50) ? $item->quality : 50;
+
+        $item->sellIn -= 1;
+
+        $item->quality = ($item->sellIn > 0) ? $item->quality : 0;
+    }
+
+    /**
+     * @param Item $item
+     */
+    private function processSulfurasItem(Item $item)
+    {
     }
 }
