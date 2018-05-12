@@ -99,16 +99,4 @@ class GildedRoseTest extends TestCase
 
         $this->assertEquals($expected, $item->quality);
     }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    function testInvalidArgumentException()
-    {
-        $item = new Item("Exception", 0, 0);
-
-        $gildedRose = new GildedRose([$item]);
-
-        $gildedRose->updateQuality();
-    }
 }

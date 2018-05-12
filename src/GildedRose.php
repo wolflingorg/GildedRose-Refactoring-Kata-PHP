@@ -10,7 +10,6 @@ class GildedRose
     const AGED_BRIE = 'Aged Brie';
     const BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert';
     const SULFURAS = 'Sulfuras, Hand of Ragnaros';
-    const NORMAL = 'Normal';
 
     /**
      * @var Item[]
@@ -27,8 +26,6 @@ class GildedRose
 
     /**
      * Updates quality and sellIn for Item
-     *
-     * @throws InvalidArgumentException
      */
     public function updateQuality()
     {
@@ -39,15 +36,10 @@ class GildedRose
 
     /**
      * @param Item $item
-     *
-     * @throws InvalidArgumentException
      */
     private function tickItem(Item $item)
     {
         switch ($item->name) {
-            case self::NORMAL:
-                $this->tickNormalItem($item);
-                break;
             case self::AGED_BRIE:
                 $this->tickAgedBrieItem($item);
                 break;
@@ -58,7 +50,7 @@ class GildedRose
                 $this->tickSulfurasItem($item);
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf('Could not find handler for Item %s', $item->name));
+                $this->tickNormalItem($item);
         }
     }
 
