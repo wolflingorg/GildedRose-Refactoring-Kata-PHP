@@ -5,26 +5,24 @@ class Item
     /**
      * @var string
      */
-    public $name;
+    protected $name = 'Normal';
 
     /**
      * @var int
      */
-    public $sellIn;
+    protected $sellIn;
 
     /**
      * @var int
      */
-    public $quality;
+    protected $quality;
 
     /**
-     * @param $name
      * @param $sellIn
      * @param $quality
      */
-    public function __construct($name, $sellIn, $quality)
+    public function __construct($sellIn, $quality)
     {
-        $this->name = $name;
         $this->sellIn = $sellIn;
         $this->quality = $quality;
     }
@@ -35,5 +33,44 @@ class Item
     public function __toString()
     {
         return "{$this->name}, {$this->sellIn}, {$this->quality}";
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSellIn(): int
+    {
+        return $this->sellIn;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuality(): int
+    {
+        return $this->quality;
+    }
+
+    /**
+     * Updates quality and sellIn for Item
+     */
+    public function tick()
+    {
+        $this->sellIn -= 1;
+        $this->quality -= 1;
+
+        if ($this->sellIn < 0) {
+            $this->quality -= 1;
+        }
+
+        $this->quality = ($this->quality >= 0) ? $this->quality : 0;
     }
 }
