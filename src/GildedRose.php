@@ -5,7 +5,8 @@
  *
  * @see https://github.com/emilybache/GildedRose-Refactoring-Kata
  */
-class GildedRose {
+class GildedRose
+{
     /**
      * @var Item[]
      */
