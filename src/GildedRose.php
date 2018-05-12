@@ -14,14 +14,16 @@ class GildedRose {
     /**
      * @param $items
      */
-    public function __construct(array $items) {
+    public function __construct(array $items)
+    {
         $this->items = $items;
     }
 
     /**
      * Updates quality and sellIn for Item
      */
-    public function updateQuality() {
+    public function updateQuality()
+    {
         foreach ($this->items as $item) {
             if ($item->name != 'Aged Brie' and $item->name != 'Backstage passes to a TAFKAL80ETC concert') {
                 if ($item->quality > 0) {
