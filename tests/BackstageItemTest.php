@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class ItemTest extends TestCase
+class BackstageItemTest extends TestCase
 {
     /**
      * @return array
@@ -12,23 +12,11 @@ class ItemTest extends TestCase
         $quality = 10;
 
         return [
-            [new SulfurasItem(10, $quality), $quality],
-            [new SulfurasItem(0, $quality), $quality],
-            [new SulfurasItem(-10, $quality), $quality],
-
-            [new AgedBrieItem( 10, $quality), $quality + 1],
-            [new AgedBrieItem(0, $quality), $quality + 2],
-            [new AgedBrieItem( -10, $quality), $quality + 2],
-
             [new BackstageItem(30, $quality), $quality + 1],
             [new BackstageItem(10, $quality), $quality + 2],
             [new BackstageItem(5, $quality), $quality + 3],
             [new BackstageItem(0, $quality), 0],
             [new BackstageItem(-10, $quality), 0],
-
-            [new NormalItem('Normal', 30, $quality), $quality - 1],
-            [new NormalItem('Normal', 0, $quality), $quality - 2],
-            [new NormalItem('Normal', -10, $quality), $quality - 2],
         ];
     }
 
@@ -41,23 +29,11 @@ class ItemTest extends TestCase
         $days = 3;
 
         return [
-            [$days, new SulfurasItem(10, $quality), $quality],
-            [$days, new SulfurasItem(0, $quality), $quality],
-            [$days, new SulfurasItem(-10, $quality), $quality],
-
-            [$days, new AgedBrieItem(10, $quality), $quality + 1 * $days],
-            [$days, new AgedBrieItem( 0, $quality), $quality + 2 * $days],
-            [$days, new AgedBrieItem(-10, $quality), $quality + 2 * $days],
-
             [$days, new BackstageItem(30, $quality), $quality + 1 * $days],
             [$days, new BackstageItem(10, $quality), $quality + 2 * $days],
             [$days, new BackstageItem(5, $quality), $quality + 3 * $days],
             [$days, new BackstageItem(0, $quality), 0],
             [$days, new BackstageItem(-10, $quality), 0],
-
-            [$days, new NormalItem('Normal', 30, $quality), $quality - 1 * $days],
-            [$days, new NormalItem('Normal', 0, $quality), $quality - 2 * $days],
-            [$days, new NormalItem('Normal', -10, $quality), $quality - 2 * $days],
         ];
     }
 
